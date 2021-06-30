@@ -1,22 +1,22 @@
 import React, { useState } from "react";
 import ReactApexChart from "react-apexcharts";
-import { IoTrophy } from "react-icons/io5";
+// import { IoTrophy } from "react-icons/io5";
 import { BiChevronDown } from "react-icons/bi";
 
 const TeamChart = ({ graphVsTeams }) => {
   const [state] = useState({
     series: [
       {
-        name: "PRODUCT A",
-        data: graphVsTeams.threePData,
+        name: "2PTS",
+        data: graphVsTeams.twoPts,
       },
       {
-        name: "PRODUCT B",
-        data: graphVsTeams.fgData,
+        name: "3PM",
+        data: graphVsTeams.threePm,
       },
       {
-        name: "PRODUCT C",
-        data: graphVsTeams.ftData,
+        name: "PTS",
+        data: graphVsTeams.pts,
       },
     ],
     options: {
@@ -45,6 +45,7 @@ const TeamChart = ({ graphVsTeams }) => {
         zoom: {
           enabled: false,
         },
+        foreColor: "#000"
       },
       responsive: [
         {
@@ -64,31 +65,12 @@ const TeamChart = ({ graphVsTeams }) => {
       },
       xaxis: {
         type: "category",
-        categories: [
-          "2002-03",
-          "2003-04",
-          "2004-05",
-          "2005-06",
-          "2006-07",
-          "2007-08",
-          "2008-09",
-          "2009-10",
-          "2010-11",
-          "2011-12",
-          "2012-13",
-          "2013-14",
-          "2014-15",
-          "2015-16",
-          "2016-17",
-          "2017-18",
-          "2018-19",
-          "2019-20",
-          "2020-21",
-        ],
+        categories: graphVsTeams.title,
         labels: {
           style: {
             fontSize: "8px",
             fontFamily: "Lato",
+            color: "#000",
             fontWeight: 600,
             cssClass: "apexcharts-xaxis-label",
           },
@@ -105,23 +87,23 @@ const TeamChart = ({ graphVsTeams }) => {
     },
   });
 
-  const totalRewards = () => {
-    let rows = [];
-    for (let i = 0; i < state.series[0].data.length; i++) {
-      rows.push(
-        <div key={i}>
-          {[9, 10, 12, 16].includes(i) ? (
-            <div>
-              <IoTrophy />
-            </div>
-          ) : (
-            ""
-          )}
-        </div>
-      );
-    }
-    return rows;
-  };
+  // const totalRewards = () => {
+  //   let rows = [];
+  //   for (let i = 0; i < state.series[0].data.length; i++) {
+  //     rows.push(
+  //       <div key={i}>
+  //         {[9, 10, 12, 16].includes(i) ? (
+  //           <div>
+  //             <IoTrophy />
+  //           </div>
+  //         ) : (
+  //           ""
+  //         )}
+  //       </div>
+  //     );
+  //   }
+  //   return rows;
+  // };
 
   return (
     <div id="chart" className="mb-3 team-chart">
@@ -132,7 +114,7 @@ const TeamChart = ({ graphVsTeams }) => {
           </div>
           <select className="border">
             <option value="allseasons">All Seasons</option>
-            {graphVsTeams.season.map((item, i) => {
+            {["Season 1", "Season 2"].map((item, i) => {
               return <option value={item.toLowerCase().trim()}>{item}</option>
             })}
             {/* <option value="season1">Season 1</option>
@@ -146,10 +128,10 @@ const TeamChart = ({ graphVsTeams }) => {
         type="bar"
         height={350}
       />
-      <div className="home-graph-rewards mx-2 w-100">
+      {/* <div className="home-graph-rewards mx-2 w-100">
         <div className="mx-3 d-flex">{totalRewards()}</div>
-      </div>
-      <div className="home-graph-title mx-2 w-100">
+      </div> */}
+      {/* <div className="home-graph-title mx-2 w-100">
         <div className="mx-3 d-flex mt-4">
           <div style={{ width: "50%" }}>
             <div>CLE</div>
@@ -164,20 +146,20 @@ const TeamChart = ({ graphVsTeams }) => {
             <div>LAL</div>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="home-player-graph-col-name d-flex justify-content-between mt-4 mx-3">
         <div className="column-name d-flex">
           <div className="d-flex align-items-center">
             <div></div>
-            <div>FT</div>
+            <div>PTS</div>
           </div>
           <div className="d-flex align-items-center">
             <div></div>
-            <div>FG</div>
+            <div>3PM</div>
           </div>
           <div className="d-flex align-items-center">
             <div></div>
-            <div>3P</div>
+            <div>2PTS</div>
           </div>
         </div>
         <div className="compare-player">

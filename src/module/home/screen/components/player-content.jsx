@@ -19,14 +19,14 @@ import Points100Chart from "./points-100-chart";
 import Points36Chart from "./points-36-chart";
 import Accuracy100Chart from "./accuracy-100-chart";
 import Accuracy36Chart from "./accuracy-36-chart";
+import DivConfChart from "./divConf-chart";
+import DaysChart from "./days-chart";
 
 // import $ from "jquery";
 
 const ReadMore = ({ children }) => {
   const text = children[0];
   const [isReadMore, setIsReadMore] = useState(true);
-
-  useEffect(() => {}, []);
 
   const toggleReadMore = () => {
     setIsReadMore(!isReadMore);
@@ -60,6 +60,101 @@ const PlayerContent = ({ data }) => {
   const [selectMenu, setSelectMenu] = useState("graph");
   const [isOpen, setIsOpen] = useState(false);
   const [videoId, setVideoId] = useState("");
+  const [haData, setHaData] = useState({});
+  const [dcData, setDcData] = useState({});
+  const [daysData, setDaysData] = useState({});
+  const [vsTeamData, setVsTeamData] = useState({});
+
+  useEffect(() => {
+    const handleGetSplits = () => {
+      let b = [];
+      let c = [];
+      let d = [];
+      for (let a of data.tableSplits) {
+        if (a.dayOrTeam === "Home" || a.dayOrTeam === "Away") {
+          b.push(a.fgm);
+          c.push(a.threePm);
+          d.push(a.pts);
+        }
+      }
+      setHaData({
+        fgm: b,
+        threePm: c,
+        pts: d,
+      });
+    };
+
+    const handleGetDivConfSplits = () => {
+      let b = [];
+      let c = [];
+      let d = [];
+      for (let a of data.tableSplits) {
+        if (a.dayOrTeam === "Div" || a.dayOrTeam === "Conf") {
+          b.push(a.fgm);
+          c.push(a.threePm);
+          d.push(a.pts);
+        }
+      }
+      setDcData({
+        fgm: b,
+        threePm: c,
+        pts: d,
+      });
+    };
+
+    const handleGetDaysSplits = () => {
+      let b = [];
+      let c = [];
+      let d = [];
+      let title = [];
+      for (let a of data.tableSplits) {
+        if (a.dayOrTeam.includes("day")) {
+          b.push(a.fgm);
+          c.push(a.threePm);
+          d.push(a.pts);
+          title.push(a.dayOrTeam)
+        }
+      }
+      setDaysData({
+        fgm: b,
+        threePm: c,
+        pts: d,
+        title: title
+      });
+    };
+
+    const getSplitsData = () => {
+      let b = [];
+      let c = [];
+      let d = [];
+      let title = [];
+      for (let a of data.tableSplits) {
+        if (a.dayOrTeam.includes("vs.")) {
+          b.push(a.threePm);
+          c.push(a.pts);
+          d.push(a.twoPts);
+          title.push(a.dayOrTeam);
+        }
+      }
+      setVsTeamData({
+        threePm: b,
+        pts: c,
+        twoPts: d,
+        title: title,
+      });
+      console.log("}}|||||", {
+        fgm: b,
+        threePm: c,
+        pts: d,
+        title: title,
+      });
+    };
+
+    handleGetDaysSplits();
+    handleGetDivConfSplits();
+    handleGetSplits();
+    getSplitsData();
+  }, [data.tableSplits]);
 
   const openModal = (url) => {
     setVideoId(url);
@@ -571,8 +666,19 @@ const PlayerContent = ({ data }) => {
                   >
                     Home vs away
                   </span>
-                  <span>Div vs Conf</span>
-                  <span>Days rest</span>
+                  <span
+                    className={activeMenu === "div-conf" ? "active" : ""}
+                    onClick={() => setActiveMenu("div-conf")}
+                  >
+                    Div vs Conf
+                  </span>
+
+                  <span
+                    className={activeMenu === "days" ? "active" : ""}
+                    onClick={() => setActiveMenu("days")}
+                  >
+                    Days rest
+                  </span>
                 </div>
               </div>
               <div className="w-100 px-1">
@@ -589,9 +695,13 @@ const PlayerContent = ({ data }) => {
                 ) : activeMenu === "accuracy2" ? (
                   <Accuracy36Chart graphAccuracy={data.graph36Accuracy} />
                 ) : activeMenu === "teams" ? (
-                  <TeamChart graphVsTeams={data.graphVsTeams} />
+                  <TeamChart graphVsTeams={vsTeamData} />
                 ) : activeMenu === "home-away" ? (
-                  <HomeAwayChart graphHomeAway={data.graphHomeAway} />
+                  <HomeAwayChart graphHomeAway={haData} />
+                ) : activeMenu === "div-conf" ? (
+                  <DivConfChart graphHomeAway={dcData} />
+                ) : activeMenu === "days" ? (
+                  <DaysChart graphHomeAway={daysData} />
                 ) : (
                   <PlayChart
                     graphPoints={data.graphPoints}

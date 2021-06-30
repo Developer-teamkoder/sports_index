@@ -6,12 +6,15 @@ const AccuracyChart = ({ graphAccuracy }) => {
   const [state] = useState({
     series: [
       {
+        name: "FT",
         data: graphAccuracy.ftData,
       },
       {
+        name: "2 PTS",
         data: graphAccuracy.twoPtsData,
       },
       {
+        name: "3 PTS",
         data: graphAccuracy.threePtsData,
       },
     ],
@@ -78,7 +81,7 @@ const AccuracyChart = ({ graphAccuracy }) => {
       },
 
       stroke: {
-        width: 1,
+        width: 3,
       },
     },
   });

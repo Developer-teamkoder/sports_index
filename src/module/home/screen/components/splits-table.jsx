@@ -27,7 +27,8 @@ const Splits = ({ tableSplits }) => {
         i.dayOrTeam === "Home" ||
         i.dayOrTeam === "Away" ||
         i.dayOrTeam === "Div" ||
-        i.dayOrTeam === "Conf"
+        i.dayOrTeam === "Conf" ||
+        i.dayOrTeam.includes("day")
       ) {
         return false;
       } else {

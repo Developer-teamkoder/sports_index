@@ -5,7 +5,7 @@ import player_img from "../../../../assets/img/player_img.png";
 import player_brand from "../../../../assets/img/player_brand.png";
 import player_country from "../../../../assets/img/player_country.png";
 
-const HomeAwayChart = ({ graphHomeAway }) => {
+const DivConfChart = ({ graphHomeAway }) => {
   const [state] = useState({
     series: [
       {
@@ -66,7 +66,7 @@ const HomeAwayChart = ({ graphHomeAway }) => {
       },
       xaxis: {
         type: "category",
-        categories: ["Home", "Away"],
+        categories: ["Div", "Conf"],
         labels: {
           style: {
             fontSize: "12px",
@@ -78,7 +78,7 @@ const HomeAwayChart = ({ graphHomeAway }) => {
       },
       yaxis: {
         type: "category",
-        categories: ["Home", "Away"],
+        categories: ["Div", "Conf"],
         labels: {
           show: false,
         },
@@ -126,7 +126,7 @@ const HomeAwayChart = ({ graphHomeAway }) => {
       },
       xaxis: {
         type: "category",
-        categories: ["Home", "Away"],
+        categories: ["Div", "Conf"],
         labels: {
           style: {
             fontSize: "12px",
@@ -245,4 +245,4 @@ const HomeAwayChart = ({ graphHomeAway }) => {
   );
 };
 
-export default HomeAwayChart;
+export default DivConfChart;

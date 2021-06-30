@@ -741,7 +741,7 @@ body {
             margin-right: 16px;
             width: 35px;
             height: 7px;
-            background-color: #ffc90c;
+            background-color: rgb(62, 138, 228);
           }
         }
       }
@@ -754,18 +754,31 @@ body {
             margin-right: 16px;
             width: 35px;
             height: 7px;
-            background-color: #ef950d;
+            background-color: rgb(237, 125, 49);
           }
         }
       }
 
       &:nth-child(3) {
+        margin-right: 25px;
+        
         > div {
           &:nth-child(1) {
             margin-right: 16px;
             width: 35px;
             height: 7px;
-            background-color: #3e8ae4;
+            background-color: rgb(165, 165, 165) ;
+          }
+        }
+      }
+
+      &:nth-child(4) {
+        > div {
+          &:nth-child(1) {
+            margin-right: 16px;
+            width: 35px;
+            height: 7px;
+            background-color: rgb(255, 192, 0);
           }
         }
       }

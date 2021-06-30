@@ -132,8 +132,8 @@ const PlayChart = ({ graphData, graphPoints }) => {
           plugins: {
             datalabels: {
               display: true,
-              color: 'red'
-           },
+              color: "red",
+            },
             legend: {
               display: false,
             },
@@ -149,7 +149,6 @@ const PlayChart = ({ graphData, graphPoints }) => {
                 },
               },
             ],
-            
           },
         }}
         height={100}
@@ -186,6 +185,10 @@ const PlayChart = ({ graphData, graphPoints }) => {
           <div className="d-flex align-items-center">
             <div></div>
             <div>Steal</div>
+          </div>
+          <div className="d-flex align-items-center">
+            <div></div>
+            <div>Block</div>
           </div>
         </div>
         <div className="compare-player">
