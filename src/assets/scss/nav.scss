@@ -724,6 +724,18 @@ body {
           }
         }
       }
+
+      &:nth-child(4) {
+        > div {
+          &:nth-child(1) {
+            margin-right: 16px;
+            margin-left: 16px;
+            width: 35px;
+            height: 7px;
+            background-color: grey;
+          }
+        }
+      }
     }
   }
   > .column-name-2 {

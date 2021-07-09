@@ -151,17 +151,20 @@ const PlayerContent = ({ data }) => {
       let b = [];
       let c = [];
       let d = [];
+      let e = [];
       let season = [];
       for (let a of data.tableSummary) {
         b.push(Math.round(a.fgPer));
         c.push(Math.round(a.threePPer));
         d.push(Math.round(a.efgPer));
+        e.push(Math.round(a.ftPer));
         season.push(a.season);
       }
       setSummary({
         fgPer: b,
         threePPer: c,
         efgPer: d,
+        ftPer: e,
         season: season,
       });
     };

@@ -20,9 +20,13 @@ const AccuracyChart = ({ graphAccuracy, data }) => {
         name: "3P%",
         data: graphAccuracy.threePPer,
       },
+      {
+        name: "FT%",
+        data: graphAccuracy.ftPer,
+      },
     ],
     options: {
-      colors: ["#FFCA10", "#EF950D", "#3E8AE4"],
+      colors: ["#FFCA10", "#EF950D", "#3E8AE4", "grey"],
       legend: {
         show: false,
       },
@@ -51,7 +55,6 @@ const AccuracyChart = ({ graphAccuracy, data }) => {
       xaxis: {
         type: "category",
         categories: [
-          "2002-03",
           "2003-04",
           "2004-05",
           "2005-06",
@@ -143,18 +146,18 @@ const AccuracyChart = ({ graphAccuracy, data }) => {
       <div className="home-graph-rewards w-100">
         <div className="px-1 d-flex">{totalRewards()}</div>
       </div>
-      <div className="home-graph-title mx-2 w-100">
-        <div className="mx-2 d-flex mt-4">
-          <div style={{ width: "50%" }}>
+      <div className="home-graph-title w-100">
+        <div className="d-flex mt-4">
+        <div style={{ width: "39%" }}>
             <div>CLE</div>
           </div>
-          <div style={{ width: "25%" }}>
+          <div style={{ width: "22%" }}>
             <div>MIA</div>
           </div>
-          <div style={{ width: "12%" }}>
+          <div style={{ width: "22%" }}>
             <div>CLE</div>
           </div>
-          <div style={{ width: "13%" }}>
+          <div style={{ width: "17%" }}>
             <div>LAL</div>
           </div>
         </div>
@@ -172,6 +175,10 @@ const AccuracyChart = ({ graphAccuracy, data }) => {
           <div className="d-flex align-items-center">
             <div></div>
             <div>3P%</div>
+          </div>
+          <div className="d-flex align-items-center">
+            <div></div>
+            <div>FT%</div>
           </div>
         </div>
         <div className="compare-player">

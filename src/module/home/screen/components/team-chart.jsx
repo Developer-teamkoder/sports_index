@@ -45,7 +45,7 @@ const TeamChart = ({ graphVsTeams }) => {
         zoom: {
           enabled: false,
         },
-        foreColor: "#000"
+        foreColor: "#000",
       },
       responsive: [
         {
@@ -61,6 +61,18 @@ const TeamChart = ({ graphVsTeams }) => {
         bar: {
           horizontal: false,
           borderRadius: 5,
+          dataLabels: {
+            position: "center",
+            maxItems: 100,
+            hideOverflowingLabels: false,
+            orientation: "vertical",
+            style: {
+              fontSize: "14px",
+              fontFamily: "Helvetica, Arial, sans-serif",
+              fontWeight: "bold",
+              colors: ["red"],
+            },
+          },
         },
       },
       xaxis: {
@@ -68,7 +80,7 @@ const TeamChart = ({ graphVsTeams }) => {
         categories: graphVsTeams.title,
         labels: {
           style: {
-            fontSize: "8px",
+            fontSize: "10px",
             fontFamily: "Lato",
             color: "#000",
             fontWeight: 600,
@@ -115,7 +127,7 @@ const TeamChart = ({ graphVsTeams }) => {
           <select className="border">
             <option value="allseasons">All Seasons</option>
             {["Season 1", "Season 2"].map((item, i) => {
-              return <option value={item.toLowerCase().trim()}>{item}</option>
+              return <option value={item.toLowerCase().trim()}>{item}</option>;
             })}
             {/* <option value="season1">Season 1</option>
             <option value="season2">Season 2</option> */}

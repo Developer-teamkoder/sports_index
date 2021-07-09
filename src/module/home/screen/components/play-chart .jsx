@@ -158,16 +158,16 @@ const PlayChart = ({ graphData, graphPoints }) => {
       </div>
       <div className="home-graph-title mx-2 w-100">
         <div className="mx-3 d-flex mt-4">
-          <div style={{ width: "50%" }}>
+          <div style={{ width: "39%" }}>
             <div>CLE</div>
           </div>
-          <div style={{ width: "25%" }}>
+          <div style={{ width: "22%" }}>
             <div>MIA</div>
           </div>
-          <div style={{ width: "12%" }}>
+          <div style={{ width: "22%" }}>
             <div>CLE</div>
           </div>
-          <div style={{ width: "13%" }}>
+          <div style={{ width: "17%" }}>
             <div>LAL</div>
           </div>
         </div>
