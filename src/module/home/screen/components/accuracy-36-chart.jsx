@@ -2,20 +2,20 @@ import React, { useState } from "react";
 import ReactApexChart from "react-apexcharts";
 import { IoTrophy } from "react-icons/io5";
 
-const Accuracy36Chart = ({ graphAccuracy }) => {
+const Accuracy36Chart = ({ graphAccuracy, data }) => {
   const [state] = useState({
     series: [
       {
-        name: "FT",
-        data: graphAccuracy.ftData,
+        name: "FT%",
+        data: graphAccuracy.ftPer,
       },
       {
-        name: "2 PTS",
-        data: graphAccuracy.twoPtsData,
+        name: "2P%",
+        data: graphAccuracy.twoPPer,
       },
       {
-        name: "3 PTS",
-        data: graphAccuracy.threePtsData,
+        name: "3P%",
+        data: graphAccuracy.threePPer,
       },
     ],
     options: {
@@ -36,6 +36,13 @@ const Accuracy36Chart = ({ graphAccuracy }) => {
         },
         toolbar: {
           show: false,
+        },
+      },
+      tooltip: {
+        y: {
+          formatter: (val) => {
+            return `${val}%`;
+          },
         },
       },
       xaxis: {
@@ -88,10 +95,10 @@ const Accuracy36Chart = ({ graphAccuracy }) => {
 
   const totalRewards = () => {
     let rows = [];
-    for (let i = 0; i < state.series[0].data.length; i++) {
+    for (let i = 0; i < graphAccuracy.season.length; i++) {
       rows.push(
         <div key={i}>
-          {[9, 17].includes(i) ? (
+          {[8, 9, 12, 16].includes(i) ? (
             <div>
               <IoTrophy />
             </div>
@@ -109,19 +116,19 @@ const Accuracy36Chart = ({ graphAccuracy }) => {
       <div className="home-player-graph-header d-flex">
         <div className="col-3">
           <span>Games</span>
-          <span>{graphAccuracy.games}</span>
+          <span>{data.games}</span>
         </div>
         <div className="col-3">
           <span>2pts</span>
-          <span>{graphAccuracy.twoPts}%</span>
+          <span>{data.twoPts}%</span>
         </div>
         <div className="col-3">
           <span>3PTS</span>
-          <span>{graphAccuracy.threePts}%</span>
+          <span>{data.threePts}%</span>
         </div>
         <div className="col-3">
           <span>Ft</span>
-          <span>{graphAccuracy.ft}%</span>
+          <span>{data.ft}%</span>
         </div>
       </div>
       <ReactApexChart
@@ -157,11 +164,11 @@ const Accuracy36Chart = ({ graphAccuracy }) => {
           </div>
           <div className="d-flex align-items-center">
             <div></div>
-            <div>2 PTS</div>
+            <div>2P%</div>
           </div>
           <div className="d-flex align-items-center">
             <div></div>
-            <div>3 PTS</div>
+            <div>3P%</div>
           </div>
         </div>
         <div className="compare-player">

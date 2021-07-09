@@ -64,6 +64,9 @@ const PlayerContent = ({ data }) => {
   const [dcData, setDcData] = useState({});
   const [daysData, setDaysData] = useState({});
   const [vsTeamData, setVsTeamData] = useState({});
+  const [summary, setSummary] = useState({});
+  const [pos1, setPos1] = useState({});
+  const [pos2, setPos2] = useState({});
 
   useEffect(() => {
     const handleGetSplits = () => {
@@ -112,14 +115,14 @@ const PlayerContent = ({ data }) => {
           b.push(a.fgm);
           c.push(a.threePm);
           d.push(a.pts);
-          title.push(a.dayOrTeam)
+          title.push(a.dayOrTeam);
         }
       }
       setDaysData({
         fgm: b,
         threePm: c,
         pts: d,
-        title: title
+        title: title,
       });
     };
 
@@ -142,19 +145,78 @@ const PlayerContent = ({ data }) => {
         twoPts: d,
         title: title,
       });
-      console.log("}}|||||", {
-        fgm: b,
-        threePm: c,
-        pts: d,
-        title: title,
+    };
+
+    const getSummaryData = () => {
+      let b = [];
+      let c = [];
+      let d = [];
+      let season = [];
+      for (let a of data.tableSummary) {
+        b.push(Math.round(a.fgPer));
+        c.push(Math.round(a.threePPer));
+        d.push(Math.round(a.efgPer));
+        season.push(a.season);
+      }
+      setSummary({
+        fgPer: b,
+        threePPer: c,
+        efgPer: d,
+        season: season,
       });
     };
 
+    const get100posData = () => {
+      let b = [];
+      let c = [];
+      let d = [];
+      let season = [];
+      for (let a of data.tablePer100pos) {
+        b.push(a.twoPPer);
+        c.push(a.threePPer);
+        d.push(a.ftPer);
+        season.push(a.season);
+      }
+      setPos1({
+        twoPPer: b,
+        threePPer: c,
+        ftPer: d,
+        season: season,
+      });
+    };
+
+    const get36posData = () => {
+      let b = [];
+      let c = [];
+      let d = [];
+      let season = [];
+      for (let a of data.tablePer36pos) {
+        b.push(a.twoPPer);
+        c.push(a.threePPer);
+        d.push(a.ftPer);
+        season.push(a.season);
+      }
+      setPos2({
+        twoPPer: b,
+        threePPer: c,
+        ftPer: d,
+        season: season,
+      });
+    };
+
+    get100posData();
+    get36posData();
     handleGetDaysSplits();
     handleGetDivConfSplits();
     handleGetSplits();
     getSplitsData();
-  }, [data.tableSplits]);
+    getSummaryData();
+  }, [
+    data.tableSplits,
+    data.tableSummary,
+    data.tablePer100pos,
+    data.tablePer36pos,
+  ]);
 
   const openModal = (url) => {
     setVideoId(url);
@@ -689,11 +751,20 @@ const PlayerContent = ({ data }) => {
                 ) : activeMenu === "points2" ? (
                   <Points36Chart graphPoints={data.graph36Points} />
                 ) : activeMenu === "accuracy" ? (
-                  <AccuracyChart graphAccuracy={data.graphAccuracy} />
+                  <AccuracyChart
+                    graphAccuracy={summary}
+                    data={data.graphAccuracy}
+                  />
                 ) : activeMenu === "accuracy1" ? (
-                  <Accuracy100Chart graphAccuracy={data.graph100Accuracy} />
+                  <Accuracy100Chart
+                    graphAccuracy={pos1}
+                    data={data.graph100Accuracy}
+                  />
                 ) : activeMenu === "accuracy2" ? (
-                  <Accuracy36Chart graphAccuracy={data.graph36Accuracy} />
+                  <Accuracy36Chart
+                    graphAccuracy={pos2}
+                    data={data.graph36Accuracy}
+                  />
                 ) : activeMenu === "teams" ? (
                   <TeamChart graphVsTeams={vsTeamData} />
                 ) : activeMenu === "home-away" ? (

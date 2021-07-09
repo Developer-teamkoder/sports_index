@@ -64,7 +64,6 @@ const Points36Chart = ({ graphPoints }) => {
       xaxis: {
         type: "category",
         categories: [
-          "2002-03",
           "2003-04",
           "2004-05",
           "2005-06",
@@ -109,7 +108,7 @@ const Points36Chart = ({ graphPoints }) => {
     for (let i = 0; i < state.series[0].data.length; i++) {
       rows.push(
         <div key={i}>
-          {[9, 10, 12, 16].includes(i) ? (
+          {[8, 9, 12, 16].includes(i) ? (
             <div>
               <IoTrophy />
             </div>
@@ -163,16 +162,16 @@ const Points36Chart = ({ graphPoints }) => {
       </div>
       <div className="home-graph-title mx-2 w-100">
         <div className="mx-3 d-flex mt-4">
-          <div style={{ width: "50%" }}>
+          <div style={{ width: "39%" }}>
             <div>CLE</div>
           </div>
-          <div style={{ width: "25%" }}>
+          <div style={{ width: "22%" }}>
             <div>MIA</div>
           </div>
-          <div style={{ width: "12%" }}>
+          <div style={{ width: "22%" }}>
             <div>CLE</div>
           </div>
-          <div style={{ width: "13%" }}>
+          <div style={{ width: "17%" }}>
             <div>LAL</div>
           </div>
         </div>
