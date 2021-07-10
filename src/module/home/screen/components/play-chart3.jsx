@@ -3,7 +3,8 @@ import React, { useState, useEffect } from "react";
 import { IoTrophy } from "react-icons/io5";
 import ReactApexChart from "react-apexcharts";
 
-const PlayChart = ({ graphData, graphPoints }) => {
+const PlayChart3 = ({ graphData, graphPoints }) => {
+  console.log("graphData3", graphData);
   const [labels] = useState([
     "2003-04",
     "2004-05",
@@ -321,4 +322,4 @@ const PlayChart = ({ graphData, graphPoints }) => {
   );
 };
 
-export default PlayChart;
+export default PlayChart3;

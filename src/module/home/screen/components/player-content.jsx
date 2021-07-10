@@ -21,6 +21,8 @@ import Accuracy100Chart from "./accuracy-100-chart";
 import Accuracy36Chart from "./accuracy-36-chart";
 import DivConfChart from "./divConf-chart";
 import DaysChart from "./days-chart";
+import PlayChart2 from "./play-chart2";
+import PlayChart3 from "./play-chart3";
 
 // import $ from "jquery";
 
@@ -67,6 +69,9 @@ const PlayerContent = ({ data }) => {
   const [summary, setSummary] = useState({});
   const [pos1, setPos1] = useState({});
   const [pos2, setPos2] = useState({});
+  const [play1, setPlay1] = useState({});
+  const [play2, setPlay2] = useState({});
+  const [play3, setPlay3] = useState({});
 
   useEffect(() => {
     const handleGetSplits = () => {
@@ -134,14 +139,14 @@ const PlayerContent = ({ data }) => {
       for (let a of data.tableSplits) {
         if (a.dayOrTeam.includes("vs.")) {
           b.push(a.threePm);
-          c.push(a.pts);
+          c.push(a.ftm);
           d.push(a.twoPts);
           title.push(a.dayOrTeam);
         }
       }
       setVsTeamData({
         threePm: b,
-        pts: c,
+        ftm: c,
         twoPts: d,
         title: title,
       });
@@ -207,6 +212,66 @@ const PlayerContent = ({ data }) => {
       });
     };
 
+    const getPlay1Data = () => {
+      let b = [];
+      let c = [];
+      let d = [];
+      let e = [];
+      for (let a of data.tableSummary) {
+        b.push(a.trb);
+        c.push(a.ast);
+        d.push(a.stl);
+        e.push(a.blk);
+      }
+      setPlay1({
+        trb: b,
+        ast: c,
+        stl: d,
+        blk: e,
+      });
+    };
+
+    const getPlay2Data = () => {
+      let b = [];
+      let c = [];
+      let d = [];
+      let e = [];
+      for (let a of data.tablePer100pos) {
+        b.push(a.trb);
+        c.push(a.ast);
+        d.push(a.stl);
+        e.push(a.blk);
+      }
+      setPlay2({
+        trb: b,
+        ast: c,
+        stl: d,
+        blk: e,
+      });
+    };
+
+    const getPlay3Data = () => {
+      let b = [];
+      let c = [];
+      let d = [];
+      let e = [];
+      for (let a of data.tablePer36pos) {
+        b.push(a.trb);
+        c.push(a.ast);
+        d.push(a.stl);
+        e.push(a.blk);
+      }
+      setPlay3({
+        trb: b,
+        ast: c,
+        stl: d,
+        blk: e,
+      });
+    };
+
+    getPlay1Data();
+    getPlay2Data();
+    getPlay3Data();
     get100posData();
     get36posData();
     handleGetDaysSplits();
@@ -609,8 +674,8 @@ const PlayerContent = ({ data }) => {
                         Accuracy
                       </span>
                       <span
-                        className={activeMenu === "play" ? "active" : ""}
-                        onClick={() => setActiveMenu("play")}
+                        className={activeMenu === "play1" ? "active" : ""}
+                        onClick={() => setActiveMenu("play1")}
                       >
                         Play
                       </span>
@@ -649,8 +714,8 @@ const PlayerContent = ({ data }) => {
                         Accuracy
                       </span>
                       <span
-                        className={activeMenu === "play1" ? "active" : ""}
-                        onClick={() => setActiveMenu("play1")}
+                        className={activeMenu === "play2" ? "active" : ""}
+                        onClick={() => setActiveMenu("play2")}
                       >
                         Play
                       </span>
@@ -689,8 +754,8 @@ const PlayerContent = ({ data }) => {
                         Accuracy
                       </span>
                       <span
-                        className={activeMenu === "play2" ? "active" : ""}
-                        onClick={() => setActiveMenu("play2")}
+                        className={activeMenu === "play3" ? "active" : ""}
+                        onClick={() => setActiveMenu("play3")}
                       >
                         Play
                       </span>
@@ -776,17 +841,12 @@ const PlayerContent = ({ data }) => {
                   <DivConfChart graphHomeAway={dcData} />
                 ) : activeMenu === "days" ? (
                   <DaysChart graphHomeAway={daysData} />
+                ) : activeMenu === "play1" ? (
+                  <PlayChart graphPoints={data.graphPoints} graphData={play1} />
+                ) : activeMenu === "play2" ? (
+                  <PlayChart2 graphPoints={data.graphPoints} graphData={play2} />
                 ) : (
-                  <PlayChart
-                    graphPoints={data.graphPoints}
-                    graphData={
-                      activeMenu === "play"
-                        ? data.tableSummary
-                        : activeMenu === "play1"
-                        ? data.tablePer100pos
-                        : data.tablePer36pos
-                    }
-                  />
+                  <PlayChart3 graphPoints={data.graphPoints} graphData={play3} />
                 )}
               </div>
             </div>

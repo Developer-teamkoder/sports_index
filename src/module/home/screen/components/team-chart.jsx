@@ -4,6 +4,7 @@ import ReactApexChart from "react-apexcharts";
 import { BiChevronDown } from "react-icons/bi";
 
 const TeamChart = ({ graphVsTeams }) => {
+  console.log("graphVsTeams", graphVsTeams)
   const [state] = useState({
     series: [
       {
@@ -15,8 +16,8 @@ const TeamChart = ({ graphVsTeams }) => {
         data: graphVsTeams.threePm,
       },
       {
-        name: "PTS",
-        data: graphVsTeams.pts,
+        name: "FTM",
+        data: graphVsTeams.ftm,
       },
     ],
     options: {
@@ -163,7 +164,7 @@ const TeamChart = ({ graphVsTeams }) => {
         <div className="column-name d-flex">
           <div className="d-flex align-items-center">
             <div></div>
-            <div>PTS</div>
+            <div>FTM</div>
           </div>
           <div className="d-flex align-items-center">
             <div></div>
