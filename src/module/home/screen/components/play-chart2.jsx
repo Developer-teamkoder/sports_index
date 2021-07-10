@@ -64,9 +64,6 @@ const PlayChart2 = ({ graphData, graphPoints }) => {
           show: false,
         },
       },
-      legend: {
-        show: false,
-      },
       dataLabels: {
         enabled: false,
       },
